@@ -512,7 +512,7 @@ class JsonProcessor:
 			# we need to keep this short, because deleted messages sorter uses this as a key and it would use too much memory
 			hashed_json_path = hashlib.sha256(self.json_path.encode("utf-8")).hexdigest()[:10].upper()
 			try:
-				for messages in batched(jfs.get_messages_iterator(), 100000):
+				for messages in batched(jfs.get_messages_iterator(), 1000000):
 					file_pointer_position = jfs.get_file_pointer_position()
 					print(f'    processing batch {current_batch + 1} with {len(messages)} messages, file progress: {round(file_pointer_position / file_size * 100, 2)} %')
 
